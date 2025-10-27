@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        background-color: #0d1117;
+        color: #c9d1d9;
+      }
+
+      .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.1);
+        border-left-color: #58a6ff;
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      h2 {
+        font-size: 1.3rem;
+        margin: 0;
+        text-align: center;
+      }
+
+      p {
+        color: #8b949e;
+        font-size: 0.9rem;
+      }
+
+      a {
+        color: #58a6ff;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="spinner"></div>
+    <h2>Redirecting you to your destination...</h2>
+    <p>If not redirected automatically, <a id="redirectLink" href="#">click here</a>.</p>
+
+    <script>
+      // Get the redirect key from the URL path
+      const pathname = window.location.pathname;
+      const path = pathname.split('/').filter(p => p).pop() || '';
+      
+      fetch('redirects.json')
+        .then(res => res.json())
+        .then(data => {
+          const url = data[path];
+          const link = document.getElementById('redirectLink');
+          if (url) {
+            link.href = url;
+            document.title = "Redirecting...";
+            setTimeout(() => window.location.href = url, 1500);
+          } else {
+            document.querySelector('h2').textContent = 'Redirect not found';
+            document.querySelector('.spinner').style.display = 'none';
+            link.style.display = 'none';
+          }
+        })
+        .catch(err => {
+          document.querySelector('h2').textContent = 'Error loading redirects';
+          document.querySelector('.spinner').style.display = 'none';
+          document.querySelector('p').textContent = err.message;
+        });
+    </script>
+  </body>
+</html>
+
