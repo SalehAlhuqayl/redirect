@@ -1,7 +1,6 @@
 {
-    "links": "https://links.alhuqayl.com",
-    "Basic_Technical_Skills": "docs/Basic_Technical_Skills.pdf",
-"test":"x.com/Salehalhuqayl",
-"MarkovtoGPT":"https://eu.bbcollab.com/guest/7ffb2389aec7497596e4448e9df0b342"
-  }
-  
+  "links": "https://links.alhuqayl.com",
+  "Basic_Technical_Skills": "docs/Basic_Technical_Skills.pdf",
+  "test": "https://x.com/Salehalhuqayl",
+  "MarkovtoGPT": "https://eu.bbcollab.com/guest/7ffb2389aec7497596e4448e9df0b342"
+}
